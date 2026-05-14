@@ -44,3 +44,4 @@ pydantic-settings==2.2.1         # Environment configuration for Pydantic
 
 # ─── Production Deployment ────────────────────────────────────────────────────
 gunicorn==21.2.0                 # Production-grade WSGI/ASGI server
+aiosmtplib==3.0.2
