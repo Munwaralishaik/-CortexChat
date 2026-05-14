@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--
+  frontend/pages/verify.html — Account Activation
+  
+  Accepts the 6-digit OTP sent to the user's email during signup.
+  Successfully verifying activates the account and logs the user in.
+-->
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CortexChat — Verify Email</title>
+  <meta name="description" content="Enter your email verification code to activate your CortexChat account." />
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="icon" type="image/png" href="../assets/CortexChat_favicon.png" />
+</head>
+<body>
+
+<div class="auth-blob blob-1"></div>
+<div class="auth-blob blob-2"></div>
+
+<div class="auth-page">
+  <div class="auth-card glass-card">
+
+    <div class="auth-logo" style="justify-content: center; text-align: center; width: 100%;">
+      <div><span style="color:#ffffff">Docu</span><span style="color:#a3a3a3">Chat</span></div>
+    </div>
+
+    <h1 class="auth-title">Verify your email</h1>
+    <p class="auth-subtitle">
+      We sent a 6-digit code to <strong id="pendingEmail">your email</strong>.
+      Enter it below to activate your account.
+    </p>
+
+    <form class="auth-form" id="verifyForm" novalidate>
+
+      <div class="form-group" style="align-items:center;">
+        <label class="form-label">Verification code</label>
+        <div class="otp-inputs">
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" id="otp0" autocomplete="one-time-code" />
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" id="otp1" />
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" id="otp2" />
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" id="otp3" />
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" id="otp4" />
+          <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" id="otp5" />
+        </div>
+      </div>
+
+      <p id="formError" style="font-size:13px;display:none;text-align:center;"></p>
+
+      <button class="btn btn-primary auth-submit" type="submit" id="verifyBtn">
+        Verify &amp; Activate
+      </button>
+    </form>
+
+    <div class="resend-row">
+      Didn't receive it?
+      <button class="resend-btn" id="resendBtn">Resend code</button>
+      <span id="countdownLabel"></span>
+    </div>
+
+    <p class="auth-link-row" style="margin-top:12px;">
+      <a href="signup.html" class="nav-link" data-direction="right">Back to signup</a>
+    </p>
+  </div>
+</div>
+
+<script type="module" src="../js/verify.js"></script>
+
+</body>
+</html>
+
+</body>
+</html>

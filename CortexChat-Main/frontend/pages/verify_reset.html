@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+  frontend/pages/verify_reset.html — Password Reset Authorization
+  
+  Accepts the 6-digit OTP sent to the user's email during password recovery.
+  Successfully verifying grants access to the new password creation page.
+-->
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CortexChat — Verify Reset OTP</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="icon" type="image/png" href="../assets/CortexChat_favicon.png" />
+</head>
+<body>
+
+  <div class="auth-blob blob-1"></div>
+  <div class="auth-blob blob-2"></div>
+
+  <div class="auth-page">
+    <div class="auth-card glass-card" style="position: relative;">
+      
+      <!-- Back Button -->
+      <a href="forgot_password.html" class="nav-link" data-direction="right" style="position: absolute; top: 24px; left: 24px; font-size: 14px; text-decoration: underline; color: var(--text-muted);">Back</a>
+
+      <div class="auth-logo" style="justify-content: center; text-align: center; width: 100%; margin-top: 10px;">
+        <div><span style="color:#ffffff">Docu</span><span style="color:#a3a3a3">Chat</span></div>
+      </div>
+
+      <h1 class="auth-title">Enter OTP</h1>
+      <p class="auth-subtitle">
+        We sent a 6-digit code to <strong id="resetEmail">your email</strong>.
+      </p>
+
+      <form class="auth-form" id="verifyResetForm" novalidate>
+        <div class="form-group" style="align-items:center;">
+          <div class="otp-inputs">
+            <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" id="otp0" autocomplete="one-time-code" />
+            <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" id="otp1" />
+            <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" id="otp2" />
+            <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" id="otp3" />
+            <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" id="otp4" />
+            <input class="otp-digit" type="text" inputmode="numeric" maxlength="1" id="otp5" />
+          </div>
+        </div>
+
+        <p id="formError" style="font-size:13px;display:none;text-align:center;color:var(--error);"></p>
+
+        <button class="btn btn-primary auth-submit" type="submit" id="verifyResetBtn">
+          Verify OTP
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="../js/verify_reset.js"></script>
+
+</body>
+</html>

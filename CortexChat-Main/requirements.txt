@@ -1,0 +1,46 @@
+# ─── Web Framework & Server ──────────────────────────────────────────────────
+fastapi==0.110.0                 # High-performance API framework
+uvicorn[standard]==0.29.0        # Development ASGI server
+python-multipart==0.0.9          # Required for handling file uploads
+
+# ─── Database & ORM ──────────────────────────────────────────────────────────
+sqlalchemy==2.0.29               # SQL Toolkit and Object-Relational Mapper
+aiosqlite==0.20.0                # Async driver for SQLite (Development)
+asyncpg==0.31.0                  # Async driver for PostgreSQL (Production/Supabase)
+
+# ─── Auth & Security ──────────────────────────────────────────────────────────
+PyJWT==2.8.0                     # JSON Web Token authentication
+passlib[bcrypt]==1.7.4           # Password hashing utilities
+bcrypt==4.0.1                    # Secure password hashing backend
+python-dotenv==1.0.1             # Environment variable management (.env)
+
+# ─── AI & LLM APIs (Inference) ───────────────────────────────────────────────
+huggingface_hub>=0.23.0          # Access to HF Inference API (Embeddings + BART)
+groq>=0.13.0                     # Ultra-fast LLM inference for Q&A (Llama 3.1)
+
+# ─── Vector Search & Processing ───────────────────────────────────────────────
+faiss-cpu==1.13.0           # Efficient similarity search for RAG
+numpy>=2.0.0                     # Required for FAISS (using 2.x for Py3.13 support)
+
+# ─── Document Parsing & OCR ───────────────────────────────────────────────────
+PyMuPDF>=1.24.5                  # Fast PDF text extraction (fitz)
+python-docx==1.1.0               # Word (.docx) document parsing
+pytesseract==0.3.10              # OCR for image-based PDFs/Images
+Pillow==11.2.1                   # Image processing library (Required for OCR)
+
+# ─── PDF Export & Formatting ──────────────────────────────────────────────────
+reportlab==4.5.0                 # PDF document generation for exports
+markdown2==2.4.13                # Converts AI Markdown responses to HTML
+beautifulsoup4==4.12.3           # HTML cleaning/parsing for PDF layout
+
+# ─── Email & Networking ──────────────────────────────────────────────────
+# Note: Email is sent via Resend HTTP API using httpx (no aiosmtplib needed)
+# aiosmtplib was removed — SMTP ports are blocked on free-tier cloud hosts
+httpx==0.27.0                    # Modern async HTTP client (API calls + email via Resend)
+
+# ─── Data Validation ──────────────────────────────────────────────────────────
+pydantic[email]==2.7.0           # Data validation and settings management
+pydantic-settings==2.2.1         # Environment configuration for Pydantic
+
+# ─── Production Deployment ────────────────────────────────────────────────────
+gunicorn==21.2.0                 # Production-grade WSGI/ASGI server
