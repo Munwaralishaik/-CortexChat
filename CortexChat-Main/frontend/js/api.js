@@ -10,7 +10,7 @@
  */
 
 // Empty BASE_URL makes all requests relative to the current host (since backend serves frontend)
-const BASE_URL = '';
+const BASE_URL = '/api';
 const TOKEN_KEY = 'CortexChat_token';
 
 // ─── Core fetch wrapper ────────────────────────────────────────────────────
