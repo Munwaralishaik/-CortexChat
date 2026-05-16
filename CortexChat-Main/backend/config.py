@@ -21,6 +21,7 @@ class Settings(BaseSettings):
 
     # ─── Database ───────────────────────
     database_url: str = "sqlite+aiosqlite:///./cortexchat.db"
+
     # Uploads
     upload_dir: str = "uploads"
 
@@ -28,15 +29,19 @@ class Settings(BaseSettings):
     secret_key: str = "supersecretkey"
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 1440
+
     @property
     def jwt_algorithm(self):
         return self.algorithm
 
     # ─── Email / OTP ────────────────────
-    email_host: str = "smtp.gmail.com"
+    email_host: str = "smtp-relay.brevo.com"
     email_port: int = 587
     email_user: str = ""
     email_pass: str = ""
+
+    # NEW
+    brevo_api_key: str = ""
 
     # ─── AI Keys ────────────────────────
     groq_api_key: str = ""

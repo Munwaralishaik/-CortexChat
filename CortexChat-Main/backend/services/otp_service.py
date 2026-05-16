@@ -2,8 +2,7 @@ import random
 import string
 from datetime import datetime, timedelta, timezone
 
-import aiosmtplib
-from email.mime.text import MIMEText
+import httpx
 from sqlalchemy import select, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -13,6 +12,7 @@ from backend.models.user import OTPRecord
 settings = get_settings()
 
 OTP_EXPIRY_MINUTES = 10
+BREVO_API_URL = "https://api.brevo.com/v3/smtp/email"
 
 
 def _generate_otp(length: int = 6) -> str:
@@ -20,7 +20,6 @@ def _generate_otp(length: int = 6) -> str:
 
 
 async def generate_and_store_otp(email: str, db: AsyncSession, context: str = "signup") -> str:
-
     now = datetime.now(timezone.utc).replace(tzinfo=None)
 
     await db.execute(
@@ -48,7 +47,6 @@ async def generate_and_store_otp(email: str, db: AsyncSession, context: str = "s
 
 
 async def verify_otp(email: str, code: str, db: AsyncSession) -> bool:
-
     now = datetime.now(timezone.utc).replace(tzinfo=None)
 
     result = await db.execute(
@@ -72,32 +70,54 @@ async def verify_otp(email: str, code: str, db: AsyncSession) -> bool:
 
 
 async def _send_otp_email(to_email: str, otp_code: str, context: str):
-
     if context == "reset":
-        subject = "Password Reset OTP"
+        subject = "CortexChat Password Reset OTP"
+        title = "Password Reset OTP"
     else:
-        subject = "DocuChat Verification OTP"
+        subject = "CortexChat Verification OTP"
+        title = "Verify Your CortexChat Account"
 
-    body = f"""
+    plain_body = f"""
+{title}
+
 Your OTP Code is: {otp_code}
 
-This OTP expires in 10 minutes.
+This OTP expires in {OTP_EXPIRY_MINUTES} minutes.
 
-- DocuChat Team
+- CortexChat Team
 """
 
-    message = MIMEText(body)
-    message["From"] = settings.email_user
-    message["To"] = to_email
-    message["Subject"] = subject
+    html_body = f"""
+    <div style="font-family: Arial, sans-serif; max-width: 480px; margin: auto; padding: 24px;">
+        <h2>{title}</h2>
+        <p>Your OTP code is:</p>
+        <h1 style="letter-spacing: 8px;">{otp_code}</h1>
+        <p>This OTP expires in {OTP_EXPIRY_MINUTES} minutes.</p>
+        <p>- CortexChat Team</p>
+    </div>
+    """
 
-    await aiosmtplib.send(
-        message,
-        hostname=settings.email_host,
-        port=settings.email_port,
-        start_tls=True,
-        username=settings.email_user,
-        password=settings.email_pass,
-    )
+    payload = {
+        "sender": {
+            "name": "CortexChat",
+            "email": settings.email_user,
+        },
+        "to": [{"email": to_email}],
+        "subject": subject,
+        "textContent": plain_body,
+        "htmlContent": html_body,
+    }
 
-    print(f"OTP sent successfully to {to_email}")
+    headers = {
+        "api-key": settings.brevo_api_key,
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+    }
+
+    async with httpx.AsyncClient(timeout=15) as client:
+        response = await client.post(BREVO_API_URL, json=payload, headers=headers)
+
+    if response.status_code not in (200, 201):
+        raise RuntimeError(f"Brevo API error {response.status_code}: {response.text}")
+
+    print(f"OTP sent successfully to {to_email} via Brevo API")
