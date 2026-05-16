@@ -2075,30 +2075,48 @@ input:disabled + .toggle-slider {
   color: #000 !important;
 }
 
-/* Final dashboard position fix */
+/* Final clean dashboard alignment */
 
 .chat-window {
-  padding: 48px 24px 130px 24px !important;
+  flex: 1 !important;
+  padding: 72px 24px 120px !important;
+  overflow-y: auto !important;
+}
+
+.chat-inner {
+  max-width: 850px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
 }
 
 .welcome-screen {
+  flex: none !important;
+  min-height: auto !important;
   justify-content: flex-start !important;
-  padding-top: 150px !important;
-  padding-bottom: 40px !important;
-}
-
-.sidebar {
-  padding-bottom: 16px !important;
-}
-
-.sidebar-user-section {
-  margin-bottom: 16px !important;
+  padding: 40px 24px 40px !important;
 }
 
 .input-area {
+  position: absolute !important;
   bottom: 0 !important;
-  padding-bottom: 22px !important;
+  left: 0 !important;
+  right: 0 !important;
+  padding: 16px 24px 24px !important;
 }
 
+.input-toolbar {
+  max-width: 850px !important;
+  margin: 0 auto !important;
+}
+
+.sidebar {
+  height: 100vh !important;
+  padding-bottom: 0 !important;
+}
+
+.sidebar-user-section {
+  margin-top: auto !important;
+  margin-bottom: 12px !important;
+}
 
 
