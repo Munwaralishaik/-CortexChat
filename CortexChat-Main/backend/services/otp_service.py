@@ -12,7 +12,6 @@ from backend.models.user import OTPRecord
 settings = get_settings()
 
 OTP_EXPIRY_MINUTES = 10
-BREVO_API_URL = "https://api.brevo.com/v3/smtp/email"
 
 
 def _generate_otp(length: int = 6) -> str:
@@ -20,6 +19,7 @@ def _generate_otp(length: int = 6) -> str:
 
 
 async def generate_and_store_otp(email: str, db: AsyncSession, context: str = "signup") -> str:
+
     now = datetime.now(timezone.utc).replace(tzinfo=None)
 
     await db.execute(
@@ -47,6 +47,7 @@ async def generate_and_store_otp(email: str, db: AsyncSession, context: str = "s
 
 
 async def verify_otp(email: str, code: str, db: AsyncSession) -> bool:
+
     now = datetime.now(timezone.utc).replace(tzinfo=None)
 
     result = await db.execute(
@@ -70,54 +71,56 @@ async def verify_otp(email: str, code: str, db: AsyncSession) -> bool:
 
 
 async def _send_otp_email(to_email: str, otp_code: str, context: str):
-    if context == "reset":
-        subject = "CortexChat Password Reset OTP"
-        title = "Password Reset OTP"
-    else:
-        subject = "CortexChat Verification OTP"
-        title = "Verify Your CortexChat Account"
 
-    plain_body = f"""
-{title}
+    subject = "CortexChat OTP Verification"
 
+    body = f"""
 Your OTP Code is: {otp_code}
 
-This OTP expires in {OTP_EXPIRY_MINUTES} minutes.
+This OTP expires in 10 minutes.
 
 - CortexChat Team
 """
 
-    html_body = f"""
-    <div style="font-family: Arial, sans-serif; max-width: 480px; margin: auto; padding: 24px;">
-        <h2>{title}</h2>
-        <p>Your OTP code is:</p>
-        <h1 style="letter-spacing: 8px;">{otp_code}</h1>
-        <p>This OTP expires in {OTP_EXPIRY_MINUTES} minutes.</p>
-        <p>- CortexChat Team</p>
-    </div>
-    """
+    headers = {
+        "accept": "application/json",
+        "api-key": settings.brevo_api_key,
+        "content-type": "application/json",
+    }
 
-    payload = {
+    data = {
         "sender": {
             "name": "CortexChat",
-            "email": settings.email_user,
+            "email": settings.email_user
         },
-        "to": [{"email": to_email}],
+        "to": [
+            {
+                "email": to_email
+            }
+        ],
         "subject": subject,
-        "textContent": plain_body,
-        "htmlContent": html_body,
+        "htmlContent": f"""
+        <html>
+            <body>
+                <h2>Your OTP Code: {otp_code}</h2>
+                <p>This OTP expires in 10 minutes.</p>
+                <br>
+                <p>- CortexChat Team</p>
+            </body>
+        </html>
+        """
     }
 
-    headers = {
-        "api-key": settings.brevo_api_key,
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-    }
+    async with httpx.AsyncClient() as client:
+        response = await client.post(
+            "https://api.brevo.com/v3/smtp/email",
+            headers=headers,
+            json=data
+        )
 
-    async with httpx.AsyncClient(timeout=15) as client:
-        response = await client.post(BREVO_API_URL, json=payload, headers=headers)
+    print(response.text)
 
-    if response.status_code not in (200, 201):
-        raise RuntimeError(f"Brevo API error {response.status_code}: {response.text}")
+    if response.status_code not in [200, 201]:
+        raise Exception(f"Brevo email failed: {response.text}")
 
-    print(f"OTP sent successfully to {to_email} via Brevo API")
+    print(f"OTP sent successfully to {to_email}")
