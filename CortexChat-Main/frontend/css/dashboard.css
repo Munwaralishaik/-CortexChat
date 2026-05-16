@@ -10,43 +10,40 @@
 
 /* ─── Layout ─────────────────────────────────────────────────────────────── */
 .dashboard {
-  display: flex;
-  height: 111.11vh;
-  width: 111.11vw;
-  overflow: hidden;
-  background: var(--bg-base);
-  zoom: 0.9;
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: flex !important;
+  width: 100% !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  overflow: hidden !important;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  zoom: 1 !important;
+  background: #0b0b0f !important;
 }
 .sidebar {
-  width: 340px;
-  min-width: 340px;
-  display: flex;
-  flex-direction: column;
-  background: var(--bg-base); 
-  border-right: none;
-  overflow: visible;
-  height: 100%;
-  transition: transform 0.3s ease;
+  width: 290px !important;
+  min-width: 290px !important;
+  height: 100vh !important;
+  overflow: hidden !important;
+  background: #111116 !important;
+  border-right: 1px solid rgba(255,255,255,0.08) !important;
+  box-shadow: 10px 0 35px rgba(0,0,0,0.25);
 }
 
+/* Main area */
 .main-area {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  min-width: 0;
-  background: var(--bg-base);
-  z-index: 10; /* Above sidebar's 5 */
+  flex: 1 !important;
+  height: 100vh !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  background:
+    radial-gradient(circle at top, rgba(99,102,241,0.08), transparent 36%),
+    #0b0b0f !important;
 }
-
-
-
-
-
-
 .sidebar-header-line {
   display: flex;
   align-items: center;
@@ -76,17 +73,10 @@
 }
 
 .sidebar-search-input {
-  width: 100%;
-  height: 32px;
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 0 12px 0 28px; /* Reduced from 34px to bring text closer to icon */
-  text-align: left; /* Left-align the text */
-  font-size: 13px;
-  color: var(--text-primary);
-  outline: none;
-  transition: all 0.2s;
+  height: 38px !important;
+  border-radius: 14px !important;
+  background: rgba(255,255,255,0.045) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
 }
 
 .sidebar-search-input:focus {
@@ -111,7 +101,7 @@
   padding-left: 12px; /* Move a little to the right */
 }
 
-.logo-docu { color: #ffffff; transition: color 0.3s; }
+.logo-Cortex { color: #ffffff; transition: color 0.3s; }
 .logo-chat { color: #a3a3a3; }
 
 [data-theme="light"] .logo-docu { color: #000000; }
@@ -161,17 +151,13 @@
 .new-chat-btn-small svg { flex-shrink: 0; }
 
 
-.sidebar-chats-section {
-  flex: 3; /* ~60% */
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  margin: 4px 12px 6px; /* Reduced top margin */
-  background: var(--bg-elevated);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-md);
+.sidebar-chats-section,
+.sidebar-docs-section,
+.sidebar-user-section {
+  background: rgba(255,255,255,0.035) !important;
+  border: 1px solid rgba(255,255,255,0.07) !important;
+  border-radius: 18px !important;
+  box-shadow: none !important;
 }
 
 .sidebar-chats-section .chat-history-list {
@@ -200,8 +186,8 @@
   background: var(--border);
 }
 
-.sidebar-docs-section {
-  flex: 2; /* ~40% */
+/* .sidebar-docs-section {
+  flex: 2; /* ~40% 
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -211,7 +197,7 @@
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-md);
-}
+  }  */
 
 
 .sidebar-docs-section .files-panel {
@@ -219,10 +205,6 @@
   overflow-y: auto; /* Internal scroll */
   padding: 4px 0;
 }
-
-
-
-
 .sidebar-docs-section .files-panel {
   flex: 1;
   overflow-y: auto;
@@ -231,7 +213,6 @@
   scrollbar-color: transparent transparent;
   transition: scrollbar-color 0.3s;
 }
-
 .sidebar-docs-section .files-panel:hover {
   scrollbar-color: var(--border) transparent;
 }
@@ -249,17 +230,17 @@
   background: var(--border);
 }
 
-.sidebar-user-section {
+/* .sidebar-user-section {
   padding: 8px 12px;
-  margin: 0 12px 12px; /* Restored some bottom margin for aesthetics, but ensured no overflow */
+  margin: 0 12px 12px; /* Restored some bottom margin for aesthetics, but ensured no overflow 
   background: var(--bg-elevated);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-md);
   position: relative;
   flex-shrink: 0;
-  margin-top: auto; /* Pushes it to the bottom of the sidebar */
-}
+  margin-top: auto;
+} */
 
 .sidebar-section-title {
   padding: 12px 16px 4px;
@@ -347,9 +328,6 @@
   flex-direction: column;
   padding: 4px;
 }
-
-
-
 
 .chat-options-menu.show {
   display: flex;
@@ -482,7 +460,6 @@
   padding: 8px 12px;
 }
 
-
 .doc-card {
   position: relative;
   display: flex;
@@ -529,19 +506,10 @@
   font-size: 13px;
 }
 .dropdown-selected {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: var(--text-primary);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 6px 12px 6px 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  transition: all 0.2s;
-  user-select: none;
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  border-radius: 999px !important;
+  padding: 9px 16px !important;
 }
 .dropdown-selected:hover {
   background-color: var(--bg-surface);
@@ -715,6 +683,238 @@
 .custom-select-container {
   position: relative;
   width: 100%;
+}
+/* =========================================================
+   PROFESSIONAL DASHBOARD LAYOUT FIX
+   Add this at the END of frontend/css/dashboard.css
+========================================================= */
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.dashboard {
+  display: flex !important;
+  width: 100% !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  overflow: hidden !important;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  zoom: 1 !important;
+  background: #0b0b0f !important;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 290px !important;
+  min-width: 290px !important;
+  height: 100vh !important;
+  overflow: hidden !important;
+  background: #111116 !important;
+  border-right: 1px solid rgba(255,255,255,0.08) !important;
+  box-shadow: 10px 0 35px rgba(0,0,0,0.25);
+}
+
+/* Main area */
+.main-area {
+  flex: 1 !important;
+  height: 100vh !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  background:
+    radial-gradient(circle at top, rgba(99,102,241,0.08), transparent 36%),
+    #0b0b0f !important;
+}
+
+/* Remove ugly horizontal scroll */
+.chat-window {
+  flex: 1 !important;
+  width: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding: 72px 28px 150px !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.chat-inner {
+  width: 100% !important;
+  max-width: 900px !important;
+  margin: 0 auto !important;
+}
+
+/* Welcome screen */
+.welcome-screen {
+  min-height: calc(100vh - 260px) !important;
+  justify-content: center !important;
+  padding: 0 20px !important;
+}
+
+.welcome-screen h2 {
+  font-size: 34px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.6px;
+  color: #f8fafc !important;
+}
+
+.welcome-screen p {
+  font-size: 15px !important;
+  color: #94a3b8 !important;
+}
+
+/* Suggestion cards */
+.welcome-suggestions {
+  max-width: 660px !important;
+  gap: 14px !important;
+}
+
+.suggestion-card {
+  background: rgba(255,255,255,0.035) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 18px !important;
+  padding: 20px !important;
+  transition: all 0.22s ease !important;
+}
+
+.suggestion-card:hover {
+  background: rgba(255,255,255,0.07) !important;
+  border-color: rgba(129,140,248,0.35) !important;
+  transform: translateY(-3px) !important;
+}
+
+/* Input area */
+.input-area {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  padding: 18px 28px 24px !important;
+  background: linear-gradient(to top, #0b0b0f 70%, transparent) !important;
+  z-index: 100 !important;
+  pointer-events: none !important;
+}
+
+.input-toolbar {
+  max-width: 900px !important;
+  margin: 0 auto !important;
+  pointer-events: auto !important;
+}
+
+.input-box-wrapper {
+  width: 100% !important;
+  min-height: 62px !important;
+  background: rgba(22,22,26,0.92) !important;
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  border-radius: 26px !important;
+  padding: 12px 16px !important;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.35) !important;
+  backdrop-filter: blur(18px) !important;
+}
+
+.msg-textarea {
+  font-size: 16px !important;
+  color: #f8fafc !important;
+}
+
+.msg-textarea::placeholder {
+  color: #71717a !important;
+}
+
+/* Options bar */
+.options-bar {
+  margin-bottom: 8px !important;
+}
+
+.dropdown-selected {
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  border-radius: 999px !important;
+  padding: 9px 16px !important;
+}
+
+/* Sidebar search */
+.sidebar-search-input {
+  height: 38px !important;
+  border-radius: 14px !important;
+  background: rgba(255,255,255,0.045) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+/* Sidebar sections */
+.sidebar-chats-section,
+.sidebar-docs-section,
+.sidebar-user-section {
+  background: rgba(255,255,255,0.035) !important;
+  border: 1px solid rgba(255,255,255,0.07) !important;
+  border-radius: 18px !important;
+  box-shadow: none !important;
+}
+
+/* User profile block */
+.user-block {
+  padding: 12px !important;
+}
+
+.user-avatar-small {
+  background: #f8fafc !important;
+  color: #111827 !important;
+}
+
+/* Logout modal / all action modals */
+.chat-action-overlay,
+.doc-delete-overlay,
+.settings-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(0,0,0,0.72) !important;
+  backdrop-filter: blur(8px) !important;
+  z-index: 9999 !important;
+}
+
+.chat-action-modal,
+.doc-delete-modal,
+.settings-panel {
+  background: #18181d !important;
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.55) !important;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed !important;
+    inset: 0 auto 0 0 !important;
+    z-index: 1000 !important;
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0) !important;
+  }
+
+  .chat-window {
+    padding: 56px 16px 145px !important;
+  }
+
+  .welcome-suggestions {
+    grid-template-columns: 1fr !important;
+  }
+
+  .input-area {
+    padding: 14px 14px 18px !important;
+  }
 }
 .custom-select-trigger {
   width: 100%;
@@ -947,11 +1147,13 @@
 
 /* ─── Chat window ────────────────────────────────────────────────────────── */
 .chat-window {
-  flex: 1;
-  overflow-y: auto;
-  padding: 90px 24px 60px 24px; /* Further reduced bottom padding for a tighter fit */
-  display: flex;
-  flex-direction: column;
+  flex: 1 !important;
+  width: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding: 72px 28px 150px !important;
+  display: flex !important;
+  justify-content: center !important;
 }
 
 .chat-window:has(.welcome-screen:not([style*="none"])) {
@@ -959,53 +1161,49 @@
 }
 
 .chat-inner {
-  max-width: 800px; /* Reduced from 850px */
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  flex: 1;
-  padding-bottom: 0px; /* Removed extra space */
+  width: 100% !important;
+  max-width: 900px !important;
+  margin: 0 auto !important;
 }
-
 /* ─── Welcome screen ─────────────────────────────────────────────────────── */
 .welcome-screen {
-  display: var(--welcome-display, flex);
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  flex: 1;
-  padding: 0 24px 12vh 24px;
-  animation: fade-up 0.5s ease both;
+  min-height: calc(100vh - 260px) !important;
+  justify-content: center !important;
+  padding: 0 20px !important;
 }
-.welcome-icon { font-size: 56px; margin-bottom: 16px; }
-.welcome-screen h2 { font-size: 28px; margin-bottom: 10px; }
-.welcome-screen p  { color: var(--text-muted); font-size: 15px; margin-bottom: 36px; }
+.welcome-icon {
+   font-size: 56px; 
+   margin-bottom: 16px; 
+  }
+..welcome-screen h2 {
+  font-size: 34px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.6px;
+  color: #f8fafc !important;
+}
+
+.welcome-screen p {
+  font-size: 15px !important;
+  color: #94a3b8 !important;
+}
 
 .welcome-suggestions {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  width: 100%;
-  max-width: 560px;
+  max-width: 660px !important;
+  gap: 14px !important;
 }
 
 .suggestion-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 18px;
-  text-align: left;
-  cursor: pointer;
-  transition: all 0.2s;
+  background: rgba(255,255,255,0.035) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 18px !important;
+  padding: 20px !important;
+  transition: all 0.22s ease !important;
 }
+
 .suggestion-card:hover {
-  border-color: var(--border-active);
-  background: var(--bg-elevated);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
+  background: rgba(255,255,255,0.07) !important;
+  border-color: rgba(129,140,248,0.35) !important;
+  transform: translateY(-3px) !important;
 }
 .sug-icon  { font-size: 22px; margin-bottom: 8px; }
 .sug-title { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
@@ -1180,41 +1378,30 @@
 
 /* ─── Input area ─────────────────────────────────────────────────────────── */
 .input-area {
-  padding: 0 24px 4px;
-  background: linear-gradient(to top, var(--bg-base) 0%, var(--bg-base) 40px, transparent 40px);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  flex-shrink: 0;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 5000;
-  pointer-events: none;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  padding: 18px 28px 24px !important;
+  background: linear-gradient(to top, #0b0b0f 70%, transparent) !important;
+  z-index: 100 !important;
+  pointer-events: none !important;
 }
 [data-theme="light"] .input-area {
   background: transparent;
 }
 
 .input-toolbar {
-  max-width: 850px;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  pointer-events: auto;
+  max-width: 900px !important;
+  margin: 0 auto !important;
+  pointer-events: auto !important;
 }
 [data-theme="light"] .input-toolbar {
   background: transparent;
 }
 
 .options-bar {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-origin: left;
+  margin-bottom: 8px !important;
 }
 .options-bar.shifted {
   transform: translateX(135px);
@@ -1246,24 +1433,23 @@
   transition: all 0.2s;
   cursor: pointer;
 }
-.drop-zone.visible { display: block; }
+.drop-zone.visible { 
+  display: block;
+ }
 .drop-zone.dragover {
   border-color: var(--accent);
   background: rgba(124,111,253,0.08);
   color: var(--accent);
 }
-
 .input-box-wrapper {
-  display: flex;
-  align-items: flex-end;
-  gap: 10px;
-  background: rgba(18, 18, 18, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 6px 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  width: 100% !important;
+  min-height: 62px !important;
+  background: rgba(22,22,26,0.92) !important;
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  border-radius: 26px !important;
+  padding: 12px 16px !important;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.35) !important;
+  backdrop-filter: blur(18px) !important;
 }
 [data-theme="light"] .input-box-wrapper {
   background: rgba(0, 0, 0, 0.02);
@@ -1272,22 +1458,12 @@
 }
 
 .msg-textarea {
-  flex: 1;
-  background: none;
-  border: none;
-  color: var(--text-primary);
-  font-family: inherit;
-  font-size: 15px;
-  line-height: 24px;
-  padding: 6px 0;
-  resize: none;
-  outline: none;
-  max-height: 200px;
-  overflow-y: auto;
+  font-size: 16px !important;
+  color: #f8fafc !important;
 }
-.msg-textarea::placeholder { 
-  color: var(--text-muted); 
-  text-align: left; 
+
+.msg-textarea::placeholder {
+  color: #71717a !important;
 }
 
 .plus-icon {
