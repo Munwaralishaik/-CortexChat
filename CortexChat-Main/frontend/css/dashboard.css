@@ -2075,5 +2075,30 @@ input:disabled + .toggle-slider {
   color: #000 !important;
 }
 
+/* Final dashboard position fix */
+
+.chat-window {
+  padding: 48px 24px 130px 24px !important;
+}
+
+.welcome-screen {
+  justify-content: flex-start !important;
+  padding-top: 150px !important;
+  padding-bottom: 40px !important;
+}
+
+.sidebar {
+  padding-bottom: 16px !important;
+}
+
+.sidebar-user-section {
+  margin-bottom: 16px !important;
+}
+
+.input-area {
+  bottom: 0 !important;
+  padding-bottom: 22px !important;
+}
+
 
 
